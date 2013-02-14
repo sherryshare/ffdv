@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../lib/libcommon.a  CMakeFiles/common_static.dir/ErrorCode.cpp.o
+/usr/bin/ranlib ../lib/libcommon.a

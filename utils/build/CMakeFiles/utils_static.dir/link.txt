@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../lib/libutils_static.a  CMakeFiles/utils_static.dir/PUtils.cpp.o
+/usr/bin/ranlib ../lib/libutils_static.a

@@ -1,0 +1,2 @@
+/home/sherry/ffdv/common/build/CMakeFiles/common_dynamic.dir
+/home/sherry/ffdv/common/build/CMakeFiles/common_static.dir
