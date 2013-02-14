@@ -11,7 +11,7 @@ set(FFNET_ROOT_DIR /home/sherry/ffnet-master/network)
 #${PROJECT_SOURCE_DIR}/home//../network)
 
 ####Specify the path of ffdv/net
-set(FFDV_ROOT_DIR /home/sherry/projects/ffdv/net)
+set(FFDV_ROOT_DIR /home/sherry/ffdv/net)
 
 #####Specify the path of boost
 #set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "/home/athrun/boost_trunk/stage/include")
