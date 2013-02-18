@@ -1,2 +1,0 @@
-/home/sherry/ffdv/utils/build/CMakeFiles/utils_dynamic.dir
-/home/sherry/ffdv/utils/build/CMakeFiles/utils_static.dir
