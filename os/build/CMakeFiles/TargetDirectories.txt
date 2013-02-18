@@ -1,2 +1,0 @@
-/home/sherry/ffdv/os/build/CMakeFiles/os_dynamic.dir
-/home/sherry/ffdv/os/build/CMakeFiles/os_static.dir

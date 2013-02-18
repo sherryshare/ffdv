@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/athrun/projects_git/ffdv/manager/client.cpp
+iostream
+-
+network.h
+-
+message.pb.h
+/home/athrun/projects_git/ffdv/manager/message.pb.h
+log.h
+-
+net_layer.h
+/home/athrun/projects_git/ffdv/manager/net_layer.h
+tcp_event_handler.h
+/home/athrun/projects_git/ffdv/manager/tcp_event_handler.h
+client_event_handler.h
+/home/athrun/projects_git/ffdv/manager/client_event_handler.h
+

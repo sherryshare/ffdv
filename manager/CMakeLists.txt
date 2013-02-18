@@ -3,7 +3,6 @@ project(manager)
 
 add_definitions(-DPROTO_BUF_SUPPORT)
 add_definitions(-g)
-add_definitions(-DENABLE_LOG_CONSOLE)
 
 #set(FFDV_ROOT_DIR ${PROJECT_SOURCE_DIR}/../../net)
 ####Specify the path of ffnet/network
@@ -22,7 +21,6 @@ set(CMAKE_MODULE_PATH ${FFDV_ROOT_DIR}/cmake)
 include_directories(${PROJECT_SOURCE_DIR} ${Boost_DIR} ${FFNET_ROOT_DIR} ${FFDV_ROOT_DIR})
 link_directories(${Boost_DIR}/stage/lib ${FFNET_ROOT_DIR}/lib ${FFDV_ROOT_DIR}/lib)
 
-#add_definitions(-DENABLE_LOG_CONSOLE)
 
 set(svr_src master.cpp)
 set(clnt_src client.cpp)

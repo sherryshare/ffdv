@@ -3,7 +3,6 @@ project(os)
 
 add_definitions(-DPROTO_BUF_SUPPORT)
 add_definitions(-g)
-add_definitions(-DENABLE_LOG_CONSOLE)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 #####Specify the path of common
@@ -18,9 +17,6 @@ include_directories(${PROJECT_SOURCE_DIR} ${COMMON_ROOT_DIR})
 link_directories(${COMMON_ROOT_DIR}/lib)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
-#####Open logs for network
-#add_definitions(-DENABLE_LOG_CONSOLE)
 
 set(src_list 	sys_detail/SysLinux2_6_18.cpp
 	sys_detail/SysLinux2_6_26.cpp

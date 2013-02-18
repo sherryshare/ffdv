@@ -1,2 +1,0 @@
-/usr/bin/ar cr ../lib/libos.a  CMakeFiles/os_static.dir/sys_detail/SysLinux2_6_18.cpp.o CMakeFiles/os_static.dir/sys_detail/SysLinux2_6_26.cpp.o CMakeFiles/os_static.dir/sys_detail/SysLinux2_6_32.cpp.o CMakeFiles/os_static.dir/sys_detail/SysLinux2_6_33.cpp.o CMakeFiles/os_static.dir/sys_detail/SysLinux3_2_0.cpp.o CMakeFiles/os_static.dir/SysState.cpp.o
-/usr/bin/ranlib ../lib/libos.a

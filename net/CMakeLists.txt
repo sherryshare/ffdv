@@ -3,7 +3,6 @@ project(net)
 
 add_definitions(-DPROTO_BUF_SUPPORT)
 add_definitions(-g)
-add_definitions(-DENABLE_LOG_CONSOLE)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 
@@ -22,8 +21,6 @@ link_directories(${Boost_DIR}/stage/lib ${FFNET_ROOT_DIR}/lib)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-#####Open logs for network
-#add_definitions(-DENABLE_LOG_CONSOLE)
 
 set(src client_event_handler.cpp 
 	master_event_handler.cpp
