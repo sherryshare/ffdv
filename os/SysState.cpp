@@ -1,131 +1,220 @@
 #include "SysState.h"
-#include <stdio.h>
-#include "sys_detail/SysLinux2_6_26.h"
-#include "sys_detail/SysLinux2_6_18.h"
-#include "sys_detail/SysLinux2_6_32.h"
-#include "sys_detail/SysLinux2_6_33.h"
-#include "sys_detail/SysLinux3_2_0.h"
-#include <assert.h>///added
 
-namespace os{
-	using namespace std;
-SysState::SysState(void)
+namespace os
 {
-	std::string res = getOSVersion();
-	std::string::size_type  pos;
-	pos = res.find("Linux");
-	if(pos!=std::string::npos)		//linux系统
-	{
-		pos = res.find("2.6.26");	//linux 2.6.26
-		if(pos!=std::string::npos)
-			m_pSysInfo = new SysLinux2_6_26();
-		else if((pos = res.find("2.6.18"))!=std::string::npos)		//linux 2.6.18
-			m_pSysInfo = new SysLinux2_6_18();
-		else if((pos = res.find("2.6.32")) != std::string::npos)
-			m_pSysInfo = new SysLinux2_6_32();
-		else if((pos = res.find("2.6.33")) != std::string::npos)
-			m_pSysInfo = new SysLinux2_6_33();
-		else if((pos = res.find("3.2.0")) != std::string::npos)
-		{
-			printf("Find kernel 3.2.0!\n");//added
-			m_pSysInfo = new SysLinux3_2_0();
-			//m_pSysInfo = new SysLinux2_6_33();
-		}
-		else{
-			printf("Other kernel version!\n");//其他版本的linux系统，暂时不支持
-			assert(0);
-		}
-	}
-	else			//非linxu系统,暂不支持
-		assert(0);
+using namespace std;
+SysState::SysState ( void )
+    :m_iCPUNums ( -1 ),
+     m_iPhysicalMem ( -1 )
+{
+    string res = getOSVersion();
+    string::size_type  pos;
+    pos = res.find ( "Linux" );
+    if ( pos!=string::npos ) {	//linux
+        string::size_type end_pos;
+        istringstream iss;
+        char tmp;
+        //cpu number
+        ifstream cpu_info_file ( "/proc/cpuinfo" );
+        while ( !cpu_info_file.eof() ) {
+            cpu_info_file.get ( tmp );
+            if ( tmp == '\0' ) {
+                res.push_back ( ' ' );
+            } else if ( tmp == '\t' ) {
+                res.push_back ( ' ' );
+            } else {
+                res.push_back ( tmp );
+            }
+        }
+        cpu_info_file.close();
+        if ( !res.empty() ) {
+            string temp;
+            char none_use[255];
+            pos = res.rfind ( "processor" );
+            if ( pos != std::string::npos ) {
+                end_pos = res.find ( "\n", pos );
+                temp = res.substr ( pos, end_pos-pos );
+                sscanf ( temp.c_str(), "%s %s %d\n", none_use, none_use, &m_iCPUNums );
+                m_iCPUNums++;
+            }
+        }
+
+        //cpu time
+        ifstream stat_file ( "/proc/stat" );
+        getline ( stat_file, res );
+        stat_file.close();
+        if ( !res.empty() ) {
+            unsigned long user, nice, sys, idle, iowait, irq, softirq;
+            // skip "cpu"
+            pos = res.find_first_not_of ( " ", 3 );
+            end_pos = res.find ( "\n", pos );
+            iss.str ( res.substr ( pos, end_pos - pos ) );
+            iss >> user >> nice >> sys >> idle >> iowait >> irq >> softirq;
+            iss.clear();
+            m_ulCputime = user + nice + sys + idle + iowait + irq + softirq;
+            m_ulIdletime = idle;
+        }
+
+        //mem info
+        ifstream meminfo_file ( "/proc/meminfo" );
+        getline ( meminfo_file, res );
+        meminfo_file.close();
+        if ( !res.empty() ) {
+            pos = res.find_first_of ( ':' );
+            pos++;
+            end_pos = res.find_first_of ( 'k' );
+            iss.str ( res.substr ( pos, end_pos - pos ) );
+            iss >> m_iPhysicalMem;
+            iss.clear();
+        }
+    } else {		//other os
+        assert ( 0 );
+    }
 }
 
-SysState::~SysState(void)
+SysState::~SysState ( void )
 {
-	if(m_pSysInfo)
-		delete m_pSysInfo;
 }
 
 SysState * SysState::getInstance()
 {
-	static SysState instance;
-	return &instance;
+    static SysState instance;
+    return &instance;
 }
 
 int SysState::getCPUNums() const
 {
-	return m_pSysInfo->getCPUNums();
+    if ( m_iCPUNums < 0 ) {
+        return -1;    //unsupported
+    }
+    return m_iCPUNums;
 }
 
-int SysState::getCPUUsedRate() const
+int SysState::getCPUUsedRate()
 {
-	return m_pSysInfo->getCPUUsedRate();
+    unsigned long cputime;
+    string::size_type pos,end_pos;
+    istringstream iss;
+    string res;
+    ifstream stat_file ( "/proc/stat" );
+    getline ( stat_file, res );
+    stat_file.close();
+    if ( res.empty() ) {
+        return -1;//error:unsupported
+    }
+    unsigned long user, nice, sys, idle, iowait, irq, softirq;
+    // skip "cpu"
+    pos = res.find_first_not_of ( " ", 3 );
+    end_pos = res.find ( "\n", pos );
+    iss.str ( res.substr ( pos, end_pos - pos ) );
+    iss >> user >> nice >> sys >> idle >> iowait >> irq >> softirq;
+    iss.clear();
+    cputime = user + nice + sys + idle + iowait + irq + softirq;
+    int iUsedRate;
+    if ( cputime == m_ulCputime ) {
+        iUsedRate = 0;
+    } else {
+        iUsedRate = static_cast<int> ( 100-100.0* ( idle-m_ulIdletime ) / ( cputime-m_ulCputime ) );
+        m_ulCputime = cputime;
+        m_ulIdletime = idle;
+    }
+    return iUsedRate;
 }
 
 int SysState::getLoadAvg1() const
 {
-	return m_pSysInfo->getLoadAvg1();
+    string res;
+    istringstream iss;
+    float la1, la5, la15;
+    ifstream loadavg_file ( "/proc/loadavg" );
+    getline ( loadavg_file, res );
+    loadavg_file.close();
+    if ( res.empty() ) {
+        return -1;//error:unsupported
+    }
+    iss.str ( res );
+    iss >> la1 >> la5 >> la15;
+    iss.clear();
+    return static_cast<int> ( la1*100 );
 }
 
 int SysState::getLoadAvg5() const
 {
-	return m_pSysInfo->getLoadAvg5();
+    string res;
+    istringstream iss;
+    float la1, la5, la15;
+    ifstream loadavg_file ( "/proc/loadavg" );
+    getline ( loadavg_file, res );
+    loadavg_file.close();
+    if ( res.empty() ) {
+        return -1;//error:unsupported
+    }
+    iss.str ( res );
+    iss >> la1 >> la5 >> la15;
+    iss.clear();
+    return static_cast<int> ( la5*100 );
 }
 
 int SysState::getLoadAvg15() const
 {
-	return m_pSysInfo->getLoadAvg15();
+    string res;
+    istringstream iss;
+    float la1, la5, la15;
+    ifstream loadavg_file ( "/proc/loadavg" );
+    getline ( loadavg_file, res );
+    loadavg_file.close();
+    if ( res.empty() ) {
+        return -1;//error:unsupported
+    }
+    iss.str ( res );
+    iss >> la1 >> la5 >> la15;
+    iss.clear();
+    return static_cast<int> ( la15*100 );
 }
 
-int SysState::getTotalMem() const
+int SysState::getPhysicalMem() const
 {
-	return m_pSysInfo->getPhysicalMem();
+    if ( m_iPhysicalMem <= 0 ) {
+        return -1;    //unsupported
+    }
+    return m_iPhysicalMem / 1024;
 }
 
 int SysState::getMemUsedRate() const
 {
-	//Altered!
-	return static_cast<int>(100.0*(m_pSysInfo->getPhysicalUsedMem())/(m_pSysInfo->getPhysicalMem()));
+    string::size_type pos=0,end_pos;
+    istringstream iss;
+    string res;
+    unsigned int used_mem = m_iPhysicalMem,unused_mem;
+    ifstream meminfo_file ( "/proc/meminfo" );
+    getline ( meminfo_file, res );
+    if ( res.empty() ) {
+        return -1;//error:unsupported
+    }
+    for ( unsigned int i = 0; i < 3; i++ ) {
+        getline ( meminfo_file, res );//get a new line
+        pos = res.find_first_of ( ':' );
+        pos++;
+        end_pos = res.find_first_of ( 'k' );
+        iss.str ( res.substr ( pos, end_pos - pos ) );
+        iss >> unused_mem;
+        used_mem -= unused_mem;
+    }
+    iss.clear();
+    meminfo_file.close();
+    return static_cast<int> ( 100.0* used_mem  / m_iPhysicalMem );
 }
 
-std::string SysState::getOSVersion() const
+string SysState::getOSVersion() const
 {
-	FILE *fp = fopen("/proc/version","r");
-	if(fp == NULL)
-		return std::string();
-	std::string res;
-	char temp;
-	while((temp = fgetc(fp))!=EOF)
-	{
-		if(temp == '\0')
-			res.push_back(' ');
-		else if(temp == '\t')
-			res.push_back(' ');
-		else res.push_back(temp);
-	}
-	fclose(fp);
-	return res;
+    string res;
+    ifstream version_file ( "/proc/version" );
+    getline ( version_file, res );
+    version_file.close();
+    if ( res.empty() ) {
+        return string();//error:unsupported
+    }
+    return res;
 }
 
-int SysState::getTotalDisk() const
-{
-	fsinfo buf = m_pSysInfo->getFSInfo();
-	return static_cast<int>(1.0* buf.f_blocks * buf.f_bsize/1024/1024/1024);
-}
-
-int SysState::getFreeDisk() const
-{
-	fsinfo buf = m_pSysInfo->getFSInfo();
-	return static_cast<int>(1.0*buf.f_bfree * buf.f_bsize/1024/1024/1024);
-}
-
-int SysState::getNetInSpeed() const
-{
-	return m_pSysInfo->getInNetRate();
-}
-
-int SysState::getNetOutSpeed() const
-{
-	return m_pSysInfo->getOutNetRate();
-}
 }//end namespace os
