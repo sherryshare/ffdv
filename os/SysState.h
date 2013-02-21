@@ -1,5 +1,5 @@
-#ifndef _SYSSTATE_H
-#define _SYSSTATE_H
+#ifndef FFDV_OS_SYSSTATE_H
+#define FFDV_OS_SYSSTATE_H
 #include <fstream>
 #include <iostream>
 #include <sstream>
