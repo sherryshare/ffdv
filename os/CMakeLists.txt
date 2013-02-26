@@ -12,8 +12,14 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 #set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "/home/athrun/boost_1_52_0/stage/include")
 #set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "/home/athrun/boost_trunk/stage/lib")
 
+####Specify the path of ffnet/network
+set(FFNET_ROOT_DIR /home/sherry/ffnet-master/network)
+set(Boost_DIR /home/athrun/boost_1_52_0)
+#set(CMAKE_MODULE_PATH ${FFDV_ROOT_DIR}/cmake)
 
-include_directories(${PROJECT_SOURCE_DIR})
+
+include_directories(${PROJECT_SOURCE_DIR} ${Boost_DIR} ${FFNET_ROOT_DIR})
+link_directories(${Boost_DIR}/stage/lib ${FFNET_ROOT_DIR}/lib)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
@@ -24,8 +30,8 @@ set(src 	SysState.cpp)
 	
 add_library(os_dynamic SHARED ${src})
 add_library(os_static STATIC ${src})
-target_link_libraries(os_dynamic)
-target_link_libraries(os_static)
+target_link_libraries(os_dynamic network boost_thread protobuf boost_date_time boost_system)
+target_link_libraries(os_static network boost_thread protobuf boost_date_time boost_system)
 
 
 set_target_properties(os_dynamic PROPERTIES OUTPUT_NAME "os")

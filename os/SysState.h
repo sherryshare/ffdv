@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 #include <assert.h>
-
+#include <network.h>
 namespace os{
 class SysState
 {
@@ -17,27 +17,27 @@ public:
 	//singleton
 	static SysState *		getInstance();
 
-	int						getCPUNums()const;
+	int32_t						getCPUNums()const;
 
-	int						getCPUUsedRate();
+	int32_t						getCPUUsedRate();
 
-	int						getLoadAvg1()const;
+	int32_t						getLoadAvg1()const;
 
-	int						getLoadAvg5()const;
+	int32_t						getLoadAvg5()const;
 
-	int						getLoadAvg15()const;
+	int32_t						getLoadAvg15()const;
 	
-	int						getPhysicalMem()const;
+	int32_t						getPhysicalMem()const;
 
-	int						getMemUsedRate()const;
+	int32_t						getMemUsedRate()const;
 	
 protected:
 	std::string				getOSVersion() const;
 protected:
-	int m_iCPUNums;	
-	unsigned long m_ulCputime;
-	unsigned long m_ulIdletime;
-	unsigned int m_iPhysicalMem;
+	int32_t m_iCPUNums;	
+	uint64_t m_ulCputime;
+	uint64_t m_ulIdletime;
+	uint32_t m_iPhysicalMem;
 };
 }//end namespace os
 

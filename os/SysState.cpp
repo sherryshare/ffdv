@@ -44,7 +44,7 @@ SysState::SysState ( void )
         getline ( stat_file, res );
         stat_file.close();
         if ( !res.empty() ) {
-            unsigned long user, nice, sys, idle, iowait, irq, softirq;
+            uint64_t user, nice, sys, idle, iowait, irq, softirq;
             // skip "cpu"
             pos = res.find_first_not_of ( " ", 3 );
             end_pos = res.find ( "\n", pos );
@@ -82,7 +82,7 @@ SysState * SysState::getInstance()
     return &instance;
 }
 
-int SysState::getCPUNums() const
+int32_t SysState::getCPUNums() const
 {
     if ( m_iCPUNums < 0 ) {
         return -1;    //unsupported
@@ -90,9 +90,9 @@ int SysState::getCPUNums() const
     return m_iCPUNums;
 }
 
-int SysState::getCPUUsedRate()
+int32_t SysState::getCPUUsedRate()
 {
-    unsigned long cputime;
+    uint64_t cputime;
     string::size_type pos,end_pos;
     istringstream iss;
     string res;
@@ -102,7 +102,7 @@ int SysState::getCPUUsedRate()
     if ( res.empty() ) {
         return -1;//error:unsupported
     }
-    unsigned long user, nice, sys, idle, iowait, irq, softirq;
+    uint64_t user, nice, sys, idle, iowait, irq, softirq;
     // skip "cpu"
     pos = res.find_first_not_of ( " ", 3 );
     end_pos = res.find ( "\n", pos );
@@ -110,18 +110,18 @@ int SysState::getCPUUsedRate()
     iss >> user >> nice >> sys >> idle >> iowait >> irq >> softirq;
     iss.clear();
     cputime = user + nice + sys + idle + iowait + irq + softirq;
-    int iUsedRate;
+    int32_t iUsedRate;
     if ( cputime == m_ulCputime ) {
         iUsedRate = 0;
     } else {
-        iUsedRate = static_cast<int> ( 100-100.0* ( idle-m_ulIdletime ) / ( cputime-m_ulCputime ) );
+        iUsedRate = static_cast<int32_t> ( 100-100.0* ( idle-m_ulIdletime ) / ( cputime-m_ulCputime ) );
         m_ulCputime = cputime;
         m_ulIdletime = idle;
     }
     return iUsedRate;
 }
 
-int SysState::getLoadAvg1() const
+int32_t SysState::getLoadAvg1() const
 {
     string res;
     istringstream iss;
@@ -135,10 +135,10 @@ int SysState::getLoadAvg1() const
     iss.str ( res );
     iss >> la1 >> la5 >> la15;
     iss.clear();
-    return static_cast<int> ( la1*100 );
+    return static_cast<int32_t> ( la1*100 );
 }
 
-int SysState::getLoadAvg5() const
+int32_t SysState::getLoadAvg5() const
 {
     string res;
     istringstream iss;
@@ -152,10 +152,10 @@ int SysState::getLoadAvg5() const
     iss.str ( res );
     iss >> la1 >> la5 >> la15;
     iss.clear();
-    return static_cast<int> ( la5*100 );
+    return static_cast<int32_t> ( la5*100 );
 }
 
-int SysState::getLoadAvg15() const
+int32_t SysState::getLoadAvg15() const
 {
     string res;
     istringstream iss;
@@ -169,10 +169,10 @@ int SysState::getLoadAvg15() const
     iss.str ( res );
     iss >> la1 >> la5 >> la15;
     iss.clear();
-    return static_cast<int> ( la15*100 );
+    return static_cast<int32_t> ( la15*100 );
 }
 
-int SysState::getPhysicalMem() const
+int32_t SysState::getPhysicalMem() const
 {
     if ( m_iPhysicalMem <= 0 ) {
         return -1;    //unsupported
@@ -180,18 +180,18 @@ int SysState::getPhysicalMem() const
     return m_iPhysicalMem / 1024;
 }
 
-int SysState::getMemUsedRate() const
+int32_t SysState::getMemUsedRate() const
 {
     string::size_type pos=0,end_pos;
     istringstream iss;
     string res;
-    unsigned int used_mem = m_iPhysicalMem,unused_mem;
+    uint32_t used_mem = m_iPhysicalMem,unused_mem;
     ifstream meminfo_file ( "/proc/meminfo" );
     getline ( meminfo_file, res );
     if ( res.empty() ) {
         return -1;//error:unsupported
     }
-    for ( unsigned int i = 0; i < 3; i++ ) {
+    for ( uint32_t i = 0; i < 3; i++ ) {
         getline ( meminfo_file, res );//get a new line
         pos = res.find_first_of ( ':' );
         pos++;
@@ -202,7 +202,7 @@ int SysState::getMemUsedRate() const
     }
     iss.clear();
     meminfo_file.close();
-    return static_cast<int> ( 100.0* used_mem  / m_iPhysicalMem );
+    return static_cast<int32_t> ( 100.0* used_mem  / m_iPhysicalMem );
 }
 
 string SysState::getOSVersion() const

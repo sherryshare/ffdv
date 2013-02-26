@@ -43,17 +43,11 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/athrun/projects_git/ffdv/manager
+CMAKE_SOURCE_DIR = /home/sherry/ffdv/manager
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/athrun/projects_git/ffdv/manager/build
+CMAKE_BINARY_DIR = /home/sherry/ffdv/manager/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/client_deamon.dir
@@ -62,7 +56,7 @@ CMAKE_BINARY_DIR = /home/athrun/projects_git/ffdv/manager/build
 CMakeFiles/client_deamon.dir/all:
 	$(MAKE) -f CMakeFiles/client_deamon.dir/build.make CMakeFiles/client_deamon.dir/depend
 	$(MAKE) -f CMakeFiles/client_deamon.dir/build.make CMakeFiles/client_deamon.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/athrun/projects_git/ffdv/manager/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/sherry/ffdv/manager/build/CMakeFiles  1
 	@echo "Built target client_deamon"
 .PHONY : CMakeFiles/client_deamon.dir/all
 
@@ -72,9 +66,9 @@ all: CMakeFiles/client_deamon.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/client_deamon.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/athrun/projects_git/ffdv/manager/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sherry/ffdv/manager/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client_deamon.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/athrun/projects_git/ffdv/manager/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sherry/ffdv/manager/build/CMakeFiles 0
 .PHONY : CMakeFiles/client_deamon.dir/rule
 
 # Convenience name for target.
@@ -97,7 +91,7 @@ clean: CMakeFiles/client_deamon.dir/clean
 CMakeFiles/master.dir/all:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/depend
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/athrun/projects_git/ffdv/manager/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/sherry/ffdv/manager/build/CMakeFiles  2
 	@echo "Built target master"
 .PHONY : CMakeFiles/master.dir/all
 
@@ -107,9 +101,9 @@ all: CMakeFiles/master.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/master.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/athrun/projects_git/ffdv/manager/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sherry/ffdv/manager/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/master.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/athrun/projects_git/ffdv/manager/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sherry/ffdv/manager/build/CMakeFiles 0
 .PHONY : CMakeFiles/master.dir/rule
 
 # Convenience name for target.

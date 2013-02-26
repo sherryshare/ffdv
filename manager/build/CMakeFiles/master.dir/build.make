@@ -31,17 +31,11 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/athrun/projects_git/ffdv/manager
+CMAKE_SOURCE_DIR = /home/sherry/ffdv/manager
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/athrun/projects_git/ffdv/manager/build
+CMAKE_BINARY_DIR = /home/sherry/ffdv/manager/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/master.dir/depend.make
@@ -54,17 +48,17 @@ include CMakeFiles/master.dir/flags.make
 
 CMakeFiles/master.dir/master.cpp.o: CMakeFiles/master.dir/flags.make
 CMakeFiles/master.dir/master.cpp.o: ../master.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/athrun/projects_git/ffdv/manager/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/sherry/ffdv/manager/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/master.dir/master.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/master.dir/master.cpp.o -c /home/athrun/projects_git/ffdv/manager/master.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/master.dir/master.cpp.o -c /home/sherry/ffdv/manager/master.cpp
 
 CMakeFiles/master.dir/master.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/master.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/athrun/projects_git/ffdv/manager/master.cpp > CMakeFiles/master.dir/master.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/sherry/ffdv/manager/master.cpp > CMakeFiles/master.dir/master.cpp.i
 
 CMakeFiles/master.dir/master.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/master.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/athrun/projects_git/ffdv/manager/master.cpp -o CMakeFiles/master.dir/master.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/sherry/ffdv/manager/master.cpp -o CMakeFiles/master.dir/master.cpp.s
 
 CMakeFiles/master.dir/master.cpp.o.requires:
 .PHONY : CMakeFiles/master.dir/master.cpp.o.requires
@@ -100,6 +94,6 @@ CMakeFiles/master.dir/clean:
 .PHONY : CMakeFiles/master.dir/clean
 
 CMakeFiles/master.dir/depend:
-	cd /home/athrun/projects_git/ffdv/manager/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/athrun/projects_git/ffdv/manager /home/athrun/projects_git/ffdv/manager /home/athrun/projects_git/ffdv/manager/build /home/athrun/projects_git/ffdv/manager/build /home/athrun/projects_git/ffdv/manager/build/CMakeFiles/master.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sherry/ffdv/manager/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sherry/ffdv/manager /home/sherry/ffdv/manager /home/sherry/ffdv/manager/build /home/sherry/ffdv/manager/build /home/sherry/ffdv/manager/build/CMakeFiles/master.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/master.dir/depend
 
