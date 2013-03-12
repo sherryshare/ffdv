@@ -7,7 +7,6 @@ CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffdv/net/message.pb.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffdv/net/net_layer.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffdv/net/tcp_event_handler.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/archive/archive.h
-CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/archive/serializer.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/blocking_queue.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/event_hook.h
@@ -17,7 +16,6 @@ CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/com
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/shared_buffer.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/singleton.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/sync_queue.h
-CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/common/type_traits.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/configure/nervure_config.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/framework/global_connections.h
 CMakeFiles/client_deamon.dir/client.cpp.o: /home/sherry/ffnet-master/network/framework/net_nervure.h

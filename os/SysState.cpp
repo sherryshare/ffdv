@@ -3,11 +3,19 @@
 namespace os
 {
 using namespace std;
-SysState::SysState ( void )
+SysState::SysState ()
     :m_iCPUNums ( -1 ),
      m_iPhysicalMem ( -1 )
+{    
+}
+
+SysState::~SysState ()
 {
-    string res = getOSVersion();
+}
+
+void SysState::run()
+{
+	string res = getOSVersion();
     string::size_type  pos;
     pos = res.find ( "Linux" );
     if ( pos!=string::npos ) {	//linux
@@ -72,15 +80,12 @@ SysState::SysState ( void )
     }
 }
 
-SysState::~SysState ( void )
-{
-}
 
-SysState * SysState::getInstance()
+/*SysState * SysState::getInstance()
 {
     static SysState instance;
     return &instance;
-}
+}*/
 
 int32_t SysState::getCPUNums() const
 {

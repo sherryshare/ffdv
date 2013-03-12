@@ -7,15 +7,13 @@
 #include <assert.h>
 #include <network.h>
 namespace os{
-class SysState
+class SysState 
 {
-private:
-	SysState(void);
 public:
-	virtual ~SysState(void);
+	SysState();
+	virtual ~SysState();
 	
-	//singleton
-	static SysState *		getInstance();
+	void run();
 
 	int32_t						getCPUNums()const;
 

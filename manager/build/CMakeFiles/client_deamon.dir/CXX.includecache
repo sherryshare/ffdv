@@ -49,17 +49,9 @@ network.h
 /home/sherry/ffnet-master/network/archive/archive.h
 common.h
 /home/sherry/ffnet-master/network/archive/common.h
-
-/home/sherry/ffnet-master/network/archive/serializer.h
-common.h
-/home/sherry/ffnet-master/network/archive/common.h
-common/type_traits.h
-/home/sherry/ffnet-master/network/archive/common/type_traits.h
-archive/archive.h
-/home/sherry/ffnet-master/network/archive/archive/archive.h
-cstdlib
+boost/concept_check.hpp
 -
-cstring
+boost/utility.hpp
 -
 
 /home/sherry/ffnet-master/network/common.h
@@ -166,12 +158,6 @@ boost/thread/mutex.hpp
 boost/thread/locks.hpp
 -
 boost/noncopyable.hpp
--
-
-/home/sherry/ffnet-master/network/common/type_traits.h
-common.h
-/home/sherry/ffnet-master/network/common/common.h
-boost/cstdint.hpp
 -
 
 /home/sherry/ffnet-master/network/configure/nervure_config.h
@@ -329,8 +315,6 @@ archive/archive.h
 /home/sherry/ffnet-master/network/archive/archive.h
 common/blocking_queue.h
 /home/sherry/ffnet-master/network/common/blocking_queue.h
-archive/serializer.h
-/home/sherry/ffnet-master/network/archive/serializer.h
 common/shared_buffer.h
 /home/sherry/ffnet-master/network/common/shared_buffer.h
 common/log.h
