@@ -1,2 +1,0 @@
-/home/sherry/ffdv/net/build/CMakeFiles/net_dynamic.dir
-/home/sherry/ffdv/net/build/CMakeFiles/net_static.dir
