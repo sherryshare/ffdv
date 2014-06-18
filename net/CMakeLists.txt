@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 
 ####Specify the path of ffnet/network
-set(FFNET_ROOT_DIR /home/sherry/ffnet-master/network)
+set(FFNET_ROOT_DIR /home/sherry/ffnet/network)
 #${PROJECT_SOURCE_DIR}/home//../network)
 
 #####Specify the path of boost

@@ -10,9 +10,9 @@ ClientEventHandler::ClientEventHandler()
 
 void ClientEventHandler::onConnSucc ( ffnet::TCPConnectionBase* pConn )
 {
-    m_pMasterEndpointPtr = ffnet::EndpointPtr_t ( new ffnet::Endpoint ( pConn->getSocket().remote_endpoint() ) );
+    m_pMasterEndpointPtr = pConn->getRemoteEndpointPtr();
     std::cout<<"connect success"<<std::endl;
-    ffnet::EndpointPtr_t tpp ( new ffnet::Endpoint ( pConn->getSocket().remote_endpoint() ) );
+    ffnet::EndpointPtr_t tpp = pConn->getRemoteEndpointPtr();
     sendHeartBeatMsg ( tpp );
 }
 

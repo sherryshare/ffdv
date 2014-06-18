@@ -6,7 +6,7 @@ add_definitions(-g)
 
 #set(FFDV_ROOT_DIR ${PROJECT_SOURCE_DIR}/../../net)
 ####Specify the path of ffnet/network
-set(FFNET_ROOT_DIR /home/sherry/ffnet-master/network)
+set(FFNET_ROOT_DIR /home/sherry/ffnet/network)
 #${PROJECT_SOURCE_DIR}/home//../network)
 
 ####Specify the path of ffdv/net

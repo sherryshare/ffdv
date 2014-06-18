@@ -1,2 +1,0 @@
-/home/athrun/projects_git/ffdv/manager/build/CMakeFiles/client_deamon.dir
-/home/athrun/projects_git/ffdv/manager/build/CMakeFiles/master.dir
